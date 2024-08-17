@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    
+    <div class="example-wrapper">
+        <h1>Bienvenue sur mes deck list</h1>
+        <h2><a href="/account">Compte</a></h2>
+        <ul>
+          {% for deck in decks %}
+          <li><a href="/deck/{{ deck.id }}">{{deck.name}}</a></li>
+          {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
