@@ -9,22 +9,29 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Config\SecurityConfig;
 
 class AccountController extends AbstractController
 {
     #[Route('/account', name: 'app_account', methods: ['GET'])]
-    public function index(DeckRepository $repository): Response
+    public function index(Security $security): Response
     {
-        $decks = $repository->findAll();
-        return $this->render('account/index.html.twig', ["decks" => $decks]);
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $security->getUser();
+        if ($user instanceof User) {
+            $decks = $user->getDecks();
+            return $this->render('account/index.html.twig', ["decks" => $decks]);
+        }
     }
 
 
-    #[Route(path: 'account/login', name: 'app_login')]
+    #[Route(path: 'account/login', name: 'app_account_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -56,6 +63,7 @@ class AccountController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
 
             $entityManager->persist($user);
             $entityManager->flush();

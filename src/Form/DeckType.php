@@ -15,6 +15,7 @@ class DeckType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('deckList')
+            ->add('cover')
         ;
     }
 
