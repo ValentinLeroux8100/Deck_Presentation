@@ -1,0 +1,27 @@
+<a 
+  class="block w-full hover:scale-105 hover:cursor-pointer rounded-xl relative shadow-lg shadow-black transition ease-out overflow-hidden bg-gray-950"
+  href="/deck/{{ id }}"
+  >
+  <div class="flex overflow-hidden">
+  <img 
+    class="absolute top-1/4 left-full -translate-x-full -translate-y-1/4 w-3/5"
+    style="-webkit-mask-image: -webkit-gradient(linear, right bottom, left bottom, 
+    from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"
+    src="https://cards.scryfall.io/art_crop/front/9/e/9e449e38-6f03-4316-8ebc-d0faf79d6bc7.jpg?1683582682"/></div>
+  <div class="flex justify-between relative bg-white/5 z-40 p-4">
+    <div class="px-2">
+      <div class="text-xl font-bold">{{ name }}</div>
+      <div class="text-sm">{{ author }}</div>
+      <div class="text-2xl">
+        <i class="shadow-md ms ms-b ms-cost"></i>
+        <i class="shadow-md ms ms-g ms-cost"></i>
+        <i class="shadow-md ms ms-r ms-cost"></i>
+       </div>
+    </div>
+    <div class="flex items-center justify-center wrap gap-2">
+      <div class="shadow-lg shadow-gray-800 rounded-full py-1 px-3 bg-purple-500">Sacrifice</div>
+      <div class="shadow-lg shadow-gray-800 rounded-full py-1 px-3 bg-blue-500">Reanimator</div>
+      <div class="shadow-lg shadow-gray-800 rounded-full py-1 px-3 bg-green-500">Token</div>
+    </div>
+  </div>
+</a>
