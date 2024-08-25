@@ -33,6 +33,9 @@ class Deck
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 5, nullable: true)]
+    private ?string $colors = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,7 +72,16 @@ class Deck
 
     public function setDeckList(string $deckList): static
     {
-        $this->deckList = $deckList;
+        $cardInfos = explode('\n', $deckList);
+
+        $deckListFinal = array_map(function ($cardInfo) {
+            $splitedCardInfos = explode(' ', $cardInfo);
+
+            return implode("$", $splitedCardInfos);
+        }, $cardInfos);
+
+
+        $this->deckList = implode("\n", $deckListFinal);
 
         return $this;
     }
@@ -94,6 +106,18 @@ class Deck
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getColors(): ?string
+    {
+        return $this->colors;
+    }
+
+    public function setColors(?string $colors): static
+    {
+        $this->colors = $colors;
 
         return $this;
     }

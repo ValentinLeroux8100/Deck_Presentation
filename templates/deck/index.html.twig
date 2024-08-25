@@ -2,14 +2,25 @@
 
 {% block title %}Hello DeckController!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>{{ deck.name }}! ✅</h1>
-    <p>{{ deck.deckList }} </p>
-</div>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/cardFetch.js') }}"></script>
 {% endblock %}
+
+{% block stylesheets %}
+    <link href="{{asset('css/card.css')}}" rel="stylesheet" type="text/css" />
+    
+{% endblock %}
+
+{% block body %}
+
+<main class="p-12 flex flex-col w-full gap-4">    
+    <h1>{{ deck.name }}! ✅</h1>
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-2">
+    {% for card in deck.deckList|split('\n') %}
+        <p class="card"> {{ card }} </p>
+    {% endfor %}
+    </div>
+</main>
+{% endblock %}
+

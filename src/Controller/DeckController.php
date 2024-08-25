@@ -37,6 +37,7 @@ class DeckController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $deck->setUser($user);
+                
                 $manager->persist($deck);
                 $manager->flush();
 

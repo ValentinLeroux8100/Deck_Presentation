@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block header %} 
-    <div class="flex justify-between">
-        <h1 class="text-xl">Bienvenue sur mes deck list</h1>
-        <h1 class="text-xl"><a href="/account">Compte</a></h1>
-    </div>
+{% block headerTitle %} 
+    Bienvenue sur mes deck list
 {% endblock %}
 
 {% block body %}
@@ -11,7 +8,12 @@
     
     <main class="p-12 flex flex-col w-full gap-4">
           {% for deck in decks %}
-            {{ component('deck', {id: deck.id, name: deck.name, author: deck.user.pseudo}) }} 
+            {{ component('deck', {
+                id: deck.id, 
+                name: deck.name, 
+                author: deck.user.pseudo,
+                colorString: deck.colors
+                }) }} 
           {% endfor %}
     </main>
 {% endblock %}
